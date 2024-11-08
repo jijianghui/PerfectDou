@@ -1,5 +1,6 @@
 import multiprocessing as mp
 import pickle
+import torch
 
 from perfectdou.env.game import GameEnv
 
@@ -89,6 +90,7 @@ def evaluate(landlord, landlord_up, landlord_down, eval_data, num_workers):
     ctx = mp.get_context("spawn")
     q = ctx.SimpleQueue()
     processes = []
+    print("torch.cuda.is_available():", torch.cuda.is_available())
     for card_paly_data in card_play_data_list_each_worker:
         p = ctx.Process(
             target=mp_simulate, args=(card_paly_data, card_play_model_path_dict, q)
