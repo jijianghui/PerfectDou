@@ -68,6 +68,7 @@ def evaluate(landlord, landlord_up, landlord_down, eval_data, num_workers):
     # all_result = []
 
     # for index in range(1500,2557501,1500*170):
+    print("1 torch.cuda.is_available():", torch.cuda.is_available())
     with open(eval_data, "rb") as f:
         card_play_data_list = pickle.load(f)
 
@@ -90,7 +91,7 @@ def evaluate(landlord, landlord_up, landlord_down, eval_data, num_workers):
     ctx = mp.get_context("spawn")
     q = ctx.SimpleQueue()
     processes = []
-    print("torch.cuda.is_available():", torch.cuda.is_available())
+    print("2 torch.cuda.is_available():", torch.cuda.is_available())
     for card_paly_data in card_play_data_list_each_worker:
         p = ctx.Process(
             target=mp_simulate, args=(card_paly_data, card_play_model_path_dict, q)
