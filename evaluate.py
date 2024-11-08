@@ -1,5 +1,6 @@
 import os 
 import argparse
+import torch
 
 from perfectdou.evaluation.simulation import evaluate
 
@@ -20,7 +21,7 @@ if __name__ == '__main__':
 
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_device
-
+    print("0 torch.cuda.is_available():", torch.cuda.is_available())
     evaluate(args.landlord,
              args.landlord_up,
              args.landlord_down,
